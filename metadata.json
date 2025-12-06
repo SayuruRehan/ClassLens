@@ -1,0 +1,7 @@
+{
+  "name": "ClassLens",
+  "description": "A multimodal AI co-teacher for local-language classrooms. Converts textbook photos into localized lesson plans and quizzes.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
