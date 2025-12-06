@@ -155,7 +155,8 @@ const App: React.FC = () => {
       <footer className="bg-white border-t border-gray-200 py-6 print:hidden">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <p className="text-sm text-gray-400">
-            &copy; 2024 ClassLens. Powered by Google Gemini 2.5 Flash.
+            AI can make mistakes. Please verify generated content. <br/><br/>
+            &copy; 2025 ClassLens. Powered by Google Gemini 2.5 Flash.
           </p>
         </div>
       </footer>
