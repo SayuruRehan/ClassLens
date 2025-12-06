@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Upload, Camera, Image as ImageIcon, X } from 'lucide-react';
+import { Upload, Camera, Image as ImageIcon, X, FileText } from 'lucide-react';
 
 interface ImageUploaderProps {
   onImageSelect: (file: File) => void;
@@ -121,7 +121,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageSelect }) =
             
             <h3 className="text-xl font-bold text-gray-800 mb-2">Upload Lesson Material</h3>
             <p className="text-gray-500 mb-6">
-              Take a photo of a textbook, whiteboard, or worksheet.
+              Upload a PDF document or take a photo of a textbook/whiteboard.
             </p>
             
             {cameraError && (
@@ -134,7 +134,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageSelect }) =
               type="file" 
               ref={fileInputRef}
               onChange={handleFileChange} 
-              accept="image/*" 
+              accept="image/*,application/pdf" 
               className="hidden" 
             />
             
@@ -144,26 +144,26 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageSelect }) =
                   className="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium shadow-md hover:bg-blue-700 flex items-center gap-2 transition-colors active:scale-95"
                 >
                     <Camera size={18} />
-                    Use Camera
+                    Camera
                 </button>
                 <span className="text-gray-400 self-center">or</span>
                 <button 
                   onClick={handleGalleryClick}
                   className="bg-white text-gray-700 border border-gray-300 px-6 py-2 rounded-lg font-medium shadow-sm hover:bg-gray-50 flex items-center gap-2 transition-colors active:scale-95"
                 >
-                    <ImageIcon size={18} />
-                    Gallery
+                    <FileText size={18} />
+                    File
                 </button>
             </div>
           </div>
           
           <div className="mt-6 grid grid-cols-2 gap-4">
             <div className="bg-blue-50 p-4 rounded-xl border border-blue-100">
-                <h4 className="font-semibold text-blue-800 text-sm mb-1">Works with Textbooks</h4>
-                <p className="text-blue-600 text-xs">Snap a page to translate and quiz.</p>
+                <h4 className="font-semibold text-blue-800 text-sm mb-1">Textbooks & PDFs</h4>
+                <p className="text-blue-600 text-xs">Upload chapters or scan pages to localize.</p>
             </div>
             <div className="bg-green-50 p-4 rounded-xl border border-green-100">
-                <h4 className="font-semibold text-green-800 text-sm mb-1">Works with Handwriting</h4>
+                <h4 className="font-semibold text-green-800 text-sm mb-1">Handwriting</h4>
                 <p className="text-green-600 text-xs">Convert whiteboard notes to exercises.</p>
             </div>
           </div>

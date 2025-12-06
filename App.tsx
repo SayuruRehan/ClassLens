@@ -51,7 +51,7 @@ const App: React.FC = () => {
       setState(prev => ({
         ...prev,
         step: 'config',
-        error: "Failed to generate lesson. Please try a clearer image or different settings."
+        error: "Failed to generate lesson. Please try a clearer image/document or different settings."
       }));
     }
   };
@@ -75,7 +75,7 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col font-sans">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
+      <header className="bg-white border-b border-gray-200 sticky top-0 z-40 print:hidden">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white">
@@ -90,15 +90,19 @@ const App: React.FC = () => {
       </header>
 
       {/* Main Content */}
-      <main className="flex-grow bg-slate-50 p-4 md:p-8">
-        <div className="max-w-6xl mx-auto">
+      <main className="flex-grow bg-slate-50 p-4 md:p-8 print:bg-white print:p-0">
+        <div className="max-w-6xl mx-auto print:max-w-none">
           
-          {/* Progress Indicator (only if not in results view) */}
-          {state.step !== 'results' && <StepIndicator currentStep={state.step} />}
+          {/* Progress Indicator (only if not in results view and not printing) */}
+          {state.step !== 'results' && (
+            <div className="print:hidden">
+              <StepIndicator currentStep={state.step} />
+            </div>
+          )}
 
           {/* Error Message */}
           {state.error && (
-            <div className="max-w-md mx-auto mb-6 bg-red-50 border border-red-200 text-red-700 p-4 rounded-xl flex items-center gap-3">
+            <div className="max-w-md mx-auto mb-6 bg-red-50 border border-red-200 text-red-700 p-4 rounded-xl flex items-center gap-3 print:hidden">
               <AlertCircle size={20} />
               <p className="text-sm font-medium">{state.error}</p>
             </div>
@@ -111,7 +115,7 @@ const App: React.FC = () => {
                 <div className="text-center mb-10">
                    <h2 className="text-3xl font-extrabold text-gray-900 mb-3">Snap. Localize. Teach.</h2>
                    <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                     Upload a textbook page or whiteboard photo. We'll generate a lesson plan and quizzes in your local language instantly.
+                     Upload a textbook page, PDF, or whiteboard photo. We'll generate a lesson plan and quizzes in your local language instantly.
                    </p>
                 </div>
                 <ImageUploader onImageSelect={handleImageSelect} />
@@ -126,6 +130,7 @@ const App: React.FC = () => {
                   onNext={handleGenerate}
                   onBack={handleBackToUpload}
                   previewUrl={state.imagePreviewUrl}
+                  fileType={state.imageFile?.type || ''}
                 />
               </div>
             )}
@@ -147,7 +152,7 @@ const App: React.FC = () => {
       </main>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-gray-200 py-6">
+      <footer className="bg-white border-t border-gray-200 py-6 print:hidden">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <p className="text-sm text-gray-400">
             &copy; 2024 ClassLens. Powered by Google Gemini 2.5 Flash.

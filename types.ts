@@ -1,3 +1,4 @@
+
 export enum Language {
   ENGLISH = 'English',
   SINHALA = 'Sinhala',
@@ -8,7 +9,24 @@ export enum Subject {
   SCIENCE = 'Science',
   MATH = 'Mathematics',
   HISTORY = 'History',
+  GEOGRAPHY = 'Geography',
   ENGLISH_LANG = 'English Language',
+  SINHALA_LANG = 'Sinhala Language',
+  TAMIL_LANG = 'Tamil Language',
+  LITERATURE = 'Literature',
+  CIVICS = 'Civics',
+  ICT = 'Information & Communication Technology',
+  HEALTH = 'Health & Physical Education',
+  AESTHETICS = 'Aesthetics (Art/Music/Dance)',
+  RELIGION = 'Religion',
+  COMMERCE = 'Commerce',
+  ACCOUNTING = 'Accounting',
+  BUSINESS = 'Business Studies',
+  ECONOMICS = 'Economics',
+  SOCIAL_STUDIES = 'Social Studies',
+  ENV_STUDIES = 'Environmental Studies',
+  HOME_SCIENCE = 'Home Science',
+  AGRICULTURE = 'Agriculture',
   OTHER = 'General'
 }
 

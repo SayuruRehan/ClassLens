@@ -7,7 +7,7 @@ const fileToGenerativePart = async (file: File): Promise<{ inlineData: { data: s
     const reader = new FileReader();
     reader.onloadend = () => {
       const base64String = reader.result as string;
-      // Remove the data URL prefix (e.g., "data:image/jpeg;base64,")
+      // Remove the data URL prefix (e.g., "data:image/jpeg;base64," or "data:application/pdf;base64,")
       const base64Data = base64String.split(',')[1];
       resolve({
         inlineData: {
@@ -74,7 +74,7 @@ export const generateLessonContent = async (
 
     const prompt = `
       You are an expert teacher's assistant named ClassLens. 
-      Analyze the provided image (which could be a textbook page, whiteboard notes, or a worksheet).
+      Analyze the provided image or document (which could be a textbook page, PDF document, whiteboard notes, or a worksheet).
       
       Your goal is to create a lesson plan and practice questions for a Grade ${config.grade} class.
       The subject is ${config.subject}.
@@ -82,7 +82,7 @@ export const generateLessonContent = async (
       The difficulty level is ${config.difficulty}.
 
       Please generate:
-      1. A summary/explanation of the core concept found in the image.
+      1. A summary/explanation of the core concept found in the content.
       2. ${config.mcqCount} Multiple Choice Questions (MCQs).
       3. ${config.shortAnswerCount} Short Answer Questions.
       4. ${config.fillInBlankCount} Fill-in-the-blank questions.

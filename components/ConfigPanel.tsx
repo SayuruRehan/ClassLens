@@ -1,7 +1,7 @@
 import React from 'react';
 import { TeacherConfig, Subject, Language } from '../types';
 import { GRADES } from '../constants';
-import { BookOpen, Globe, BarChart2, List } from 'lucide-react';
+import { BookOpen, Globe, BarChart2, List, FileText } from 'lucide-react';
 
 interface ConfigPanelProps {
   config: TeacherConfig;
@@ -9,6 +9,7 @@ interface ConfigPanelProps {
   onNext: () => void;
   onBack: () => void;
   previewUrl: string | null;
+  fileType: string;
 }
 
 export const ConfigPanel: React.FC<ConfigPanelProps> = ({ 
@@ -16,12 +17,15 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
   onConfigChange, 
   onNext,
   onBack,
-  previewUrl 
+  previewUrl,
+  fileType
 }) => {
   
   const handleChange = (field: keyof TeacherConfig, value: any) => {
     onConfigChange({ ...config, [field]: value });
   };
+
+  const isPdf = fileType === 'application/pdf';
 
   return (
     <div className="w-full max-w-2xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
@@ -29,14 +33,22 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
         
         {/* Preview Side */}
         <div className="md:w-1/3 bg-gray-100 p-4 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-gray-200">
-          <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Analyzing Image</p>
+          <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Selected Content</p>
           {previewUrl && (
-            <div className="relative w-full aspect-[3/4] rounded-lg overflow-hidden shadow-md">
-              <img src={previewUrl} alt="Lesson Material" className="w-full h-full object-cover" />
+            <div className="relative w-full aspect-[3/4] rounded-lg overflow-hidden shadow-md bg-white flex items-center justify-center border border-gray-200">
+              {isPdf ? (
+                <div className="text-center p-4">
+                   <FileText size={48} className="mx-auto text-red-500 mb-3" />
+                   <p className="text-sm text-gray-700 font-medium">PDF Document</p>
+                   <p className="text-xs text-gray-500 mt-1">Ready to process</p>
+                </div>
+              ) : (
+                <img src={previewUrl} alt="Lesson Material" className="w-full h-full object-cover" />
+              )}
             </div>
           )}
           <button onClick={onBack} className="mt-4 text-sm text-gray-600 underline hover:text-gray-900">
-            Choose different image
+            Choose different file
           </button>
         </div>
 
