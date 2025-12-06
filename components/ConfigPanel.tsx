@@ -1,7 +1,7 @@
 import React from 'react';
 import { TeacherConfig, Subject, Language } from '../types';
 import { GRADES } from '../constants';
-import { BookOpen, Globe, BarChart2, List, FileText } from 'lucide-react';
+import { BookOpen, Globe, BarChart2, List, FileText, BrainCircuit } from 'lucide-react';
 
 interface ConfigPanelProps {
   config: TeacherConfig;
@@ -84,18 +84,35 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
               </div>
             </div>
 
-            {/* Language */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
-                <Globe size={14} /> Output Language
-              </label>
-              <select 
-                className="w-full rounded-lg border-gray-300 border p-2.5 focus:ring-2 focus:ring-blue-500 outline-none"
-                value={config.language}
-                onChange={(e) => handleChange('language', e.target.value)}
-              >
-                {Object.values(Language).map(l => <option key={l} value={l}>{l}</option>)}
-              </select>
+            {/* Language & Difficulty */}
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
+                  <Globe size={14} /> Output Language
+                </label>
+                <select 
+                  className="w-full rounded-lg border-gray-300 border p-2.5 focus:ring-2 focus:ring-blue-500 outline-none"
+                  value={config.language}
+                  onChange={(e) => handleChange('language', e.target.value)}
+                >
+                  {Object.values(Language).map(l => <option key={l} value={l}>{l}</option>)}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
+                  <BrainCircuit size={14} /> Difficulty
+                </label>
+                <select 
+                  className="w-full rounded-lg border-gray-300 border p-2.5 focus:ring-2 focus:ring-blue-500 outline-none"
+                  value={config.difficulty}
+                  onChange={(e) => handleChange('difficulty', e.target.value)}
+                >
+                  <option value="Easy">Easy</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Hard">Hard</option>
+                </select>
+              </div>
             </div>
 
             {/* Question Counts */}
